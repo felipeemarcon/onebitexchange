@@ -10,7 +10,7 @@ RSpec.configure do |config|
           {
             "currency": "USD/BLR",
             "value": "3.41325",
-            "date": 2018-04-20 17:22:59",
+            "date": "2018-04-20 17:22:59",
             "type": "original"
           }
         ]
