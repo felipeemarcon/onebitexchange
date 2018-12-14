@@ -19,7 +19,7 @@ RSpec.describe "Exchanges", type: :request do
         target_currency: "BRL",
         amount: @amount
       }
-      expect(response).to have_http_status(2000)
+      expect(response).to have_http_status(200)
     end
   end
 end
