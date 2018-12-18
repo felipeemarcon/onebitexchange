@@ -1,0 +1,85 @@
+/* Responsive Breakpoins */
+
+$tablet-width: 768px
+$desktop-width: 1024px
+$hd-width: 1200px
+$six-hundred-width: 1600px
+$full-width: 1920px
+
+=mobile-only
+  @media (max-width: #{$tablet-width - 1px})
+    @content
+
+=tablet
+  @media (min-width: #{$tablet-width})
+    @content
+
+=tablet-only
+  @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px})
+    @content
+
+=desktop
+  @media (min-width: #{$desktop-width})
+    @content
+
+=desktop-only
+  @media (min-width: #{$desktop-width}) and (max-width: #{$fullhd-width - 1px})
+    @content
+
+=hd
+  @media (min-width: #{$hd-width})
+    @content
+
+=six-hundred
+  @media (min-width: #{$six-hundred-width})
+    @content
+
+=fullhd
+  @media (min-width: #{$full-width})
+    @content
+
+
+/* Golden Ration Font Pattern */
+/* use: +font-size or +font-size(xl) */
+
+$base_size: 1 // For EM. For PX, use 16
+$unit: 'em' // EM or PX
+$ratio_constant: 1.414 // Options: 1.067  1.125  1.200  1.250  1.333  1.414  1.500  1.618
+
+=font-size($size:"")
+  @if $size == "xxl"
+    font-size: ($base_size * $ratio_constant * $ratio_constant * $ratio_constant * $ratio_constant)+$unit
+  @else if $size == "xl"
+    font-size: ($base_size * $ratio_constant * $ratio_constant * $ratio_constant)+$unit
+  @else if $size == "lg"
+    font-size: ($base_size * $ratio_constant * $ratio_constant)+$unit
+  @else if $size == "md"
+    font-size: ($base_size * $ratio_constant)+$unit
+  @else if $size == "sm"
+    font-size: ($base_size / $ratio_constant)+$unit
+  @else if $size == "xs"
+    font-size: ($base_size / $ratio_constant / $ratio_constant )+$unit
+  @else if $size == "xxs"
+    font-size: ($base_size / $ratio_constant / $ratio_constant / $ratio_constant)+$unit
+  @else
+    font-size: ($base_size)+$unit
+
+@mixin font-smoothing($value: on) 
+  @if $value == on 
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+  
+  @else 
+    -webkit-font-smoothing: subpixel-antialiased
+    -moz-osx-font-smoothing: auto
+
+// keyframes mixin
+=keyframes($name)
+  @-webkit-keyframes #{$name}
+    @content
+  @-moz-keyframes #{$name}
+    @content
+  @-ms-keyframes #{$name}
+    @content
+  @keyframes #{$name}
+    @content
