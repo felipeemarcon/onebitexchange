@@ -4,18 +4,21 @@
       <div class="col col-sm-12 col-md-8 offset-md-2 col-lg-6 offset-lg-0 px-lg-0 col-xl-5">
         <div class="app__col app__col--left">
           <div class="app__header">
-            <div class="text-sm-center text-lg-left">
+            <div class="text-center text-lg-left">
               <%= svg('uoko_logo') %>
             </div>
           </div>
           <div class="app__head">
             <h2 class="is-txt-white">Converta facilmente suas moedas para <span class="is-txt-bold is-txt-green-dark">qualquer moeda</span> no mundo!</h2>
           </div>
-          <div class="app__text d-sm-none d-lg-block">
+          <div class="app__text d-none d-lg-block">
             <p class="is-txt-white">Donec pulvinar eros non nunc porta hendrerit. Morbi aliquet malesuada elit, ut pharetra nulla ornare eu. Morbi dapibus quis urna at bibendum. Nunc pharetra lacus et massa gravida, in accumsan lorem iaculis.</p>
           </div>
-          <div class="app__button">
+          <div class="app__button d-none d-lg-block">
             <%= link_to "Comece agora", "#", class: "btn btn-md btn-white is-txt-medium", id: "focus-formExchange" %>
+          </div>
+          <div class="app__credits d-none d-lg-block">
+            <p class="is-txt-green-dark">Desenvolvido por <%= link_to 'Felipe Marcon', '#', class:"is-txt-white" %> no Bootcamp da OneBitCode.</p>
           </div>
         </div>
       </div>
