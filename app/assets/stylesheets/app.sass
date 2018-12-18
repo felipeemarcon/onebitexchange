@@ -12,6 +12,12 @@ body
   +desktop
     background-color: transparent
 
+a, button
+  +transition($animation-default)
+  
+  &:hover
+    +transition($animation-default)
+
 .bg-white
   background-color: $white
 
@@ -100,20 +106,23 @@ input
       margin-bottom: 45px
 
   &__form 
+    .input-hold 
+      position: relative
+      
     .input-group
       display: flex
       flex-direction: column
       justify-content: flex-start
       margin: 30px 0
 
-      &:nth-child(3)
+      &:nth-child(4)
         margin-bottom: 0
 
       label 
         letter-spacing: -0.033125em
         margin-bottom: 8px
 
-      input, select 
+      input, select, .select-custom-exchange
         background: $white
         border: 1px solid #BEE5CB
         padding: 16px 13px
@@ -132,6 +141,20 @@ input
           border-color: $green-light
           outline: none
           +transition($animation-default)
+
+      .select-custom-exchange
+        &:after 
+          content: ''
+          position: absolute
+          top: 50%
+          right: 20px
+          +transform(translateY(-50%))
+          width: 10px
+          height: 10px
+          // background-color: $green-light
+          border-left: 10px solid transparent
+          border-right: 10px solid transparent
+          border-top: 10px solid $green-light
     
     .btn-group
       margin-top: 15px
@@ -144,23 +167,44 @@ input
         letter-spacing: -0.033em
         margin: 12px 0 15px
 
-      span 
+      #resultExchange 
         font-size: 2.8125em
+        border: none
+        color: $green-light
+
+        &::placeholder
+          color: #ececec
 
     &--options.input-group
       flex-direction: row
       justify-content: center
-      
-      span
+
+      a, button
         font-size: 0.875em
         text-decoration: underline
         display: flex
-        
-        &:first-child
 
-          margin-right: 3px
-        &:last-child
-          margin-left: 3px
+      a 
+        margin-right: 3px
+
+        &:hover
+          color: $green-dark
+
+      button 
+        outline: none
+        border: none
+        color: #ececec
+        margin-left: 3px
+
+        &:disabled
+          cursor: not-allowed
+
+        &.active
+          color: $gray-dark
+          +transition($animation-default)
+      
+        &:hover:not(.reset_form:disabled) 
+          color: $green-dark
 
   +tablet 
     &__head h2 
@@ -172,7 +216,7 @@ input
 
     &__col
       padding: 5vw
-      height: 100vh
+      height: 100%
 
       &--left
         background-color: $green-light
@@ -205,12 +249,12 @@ input
         margin: 60px 0 50px 0
 
   +hd 
-    height: 100vh
+    height: 100%
     min-height: 100vh
-    overflow: hidden
 
     &__col
-      padding: 6vh 5vw 
+      padding: 6vh 5vw
+      min-height: 100vh
 
       &--left
         padding-right: 7vw
@@ -220,16 +264,21 @@ input
         padding-left: 6vw
 
     &__head 
-      margin-top: 90px
+      margin-top: 130px
 
     &__text p 
       font-size: 1.125em
 
-    &__card--head h1 
-      font-size: 1.3em
+    &__card
+      margin-top: 40px
+
+      &--head h1 
+        font-size: 1.3em
 
   +six-hundred
     &__col 
+      height: 100vh
+
       &--right
         padding-right: 14vw
         padding-left: 14vw
@@ -250,18 +299,21 @@ input
 
     &__form 
       .input-group 
-        margin: 38px 0
+        margin: 45px 0
 
         label
-          margin-bottom: 12px
+          margin-bottom: 14px
 
         input, select
-          padding: 20px 16px
-          font-size: 1.375em
+          padding: 17px 16px
+          font-size: 1.250em
 
           &::placeholder
             font-size: 0.88em
 
       .btn-group 
-        margin-top: 15px
-        
+        margin-top: 20px
+
+      &--result
+        .input-group span 
+          font-size: 4.5em

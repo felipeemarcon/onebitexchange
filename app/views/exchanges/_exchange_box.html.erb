@@ -1,33 +1,29 @@
-<form action="" class="app__form">
+<%= form_tag('/convert', method: :get, id: 'exchange_form', class: "app__form") do %>
   <div class="input-group">
     <label class="is-txt-gray-light is-txt-medium">Moeda local</label>
-    <select name="" id="" class="select-custom">
-      <option value="BRL">BRL</option>
-      <option value="BRL">BRL</option>
-      <option value="BRL">BRL</option>
-    </select>
+    <div class="input-hold">
+      <%= select_tag 'source_currency', options_for_select(currency_list, 'BRL'), class: 'select-custom-exchange', id: 'source_currency' %>
+    </div>
   </div>
   <div class="input-group">
     <label class="is-txt-gray-light is-txt-medium">Moeda de conversão</label>
-    <select name="" id="" class="select-custom">
-      <option value="EUR">EUR</option>
-      <option value="EUR">EUR</option>
-      <option value="EUR">EUR</option>
-    </select>
+    <div class="input-hold">
+      <%= select_tag 'target_currency', options_for_select(currency_list, 'USD'), class: 'select-custom-exchange', id: 'target_currency'%>
+    </div>
   </div>
   <div class="input-group">
     <label class="is-txt-gray-light is-txt-medium">Valor da conversão</label>
-    <input type="text" placeholder="Insira o valor para conversão. Ex: 10">
+    <input type='number' name='amount' id='amount' placeholder='Insira o valor para conversão. Ex: 10' step='any' required>
   </div>
   <div class="input-group btn-group">
     <button class="btn btn-lg btn-green-light is-txt-medium" type="submit">Converter</button>
   </div>
   <div class="app__form--result input-group">
     <label class="is-txt-gray-dark is-txt-medium text-center">O valor da conversão é</label>
-    <span class="is-txt-green-light is-txt-medium text-center">2.2674</span>
+    <input type='text' id='resultExchange' name='result' class='is-txt-green-light is-txt-medium text-center' placeholder='Resultado' readonly>
   </div>
   <div class="app__form--options input-group mb-0">
-    <span class="is-txt-green-light">Inverter conversão</span>
-    <span class="is-txt-gray-light">Limpar conversão</span>
+    <%# <a href="" class="is-txt-green-light" id="invertConvert">Inverter conversão</a> %>
+    <button class="is-txt-gray-light reset_form" type="reset" disabled="disabled">Limpar conversão</button>
   </div>
-</form>
+<% end %>
