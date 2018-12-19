@@ -129,7 +129,7 @@ input
       input, select, .select-custom-exchange
         background: $white
         border: 1px solid #BEE5CB
-        padding: 16px 13px
+        padding: 25px 13px
         width: 100%
         border-radius: $border-radius-3
         color: $gray-dark
@@ -147,6 +147,8 @@ input
           +transition($animation-default)
 
       .select-custom-exchange
+        width: 100% !important
+
         &:after 
           content: ''
           position: absolute
@@ -155,7 +157,7 @@ input
           +transform(translateY(-50%))
           width: 10px
           height: 10px
-          // background-color: $green-light
+          pointer-events: none
           border-left: 10px solid transparent
           border-right: 10px solid transparent
           border-top: 10px solid $green-light
@@ -178,6 +180,9 @@ input
 
         &::placeholder
           color: #ececec
+
+        &.calculating
+          color: $gray-dark
 
     &--options.input-group
       flex-direction: row
@@ -316,7 +321,7 @@ input
           margin-bottom: 14px
 
         input, select
-          padding: 17px 16px
+          padding: 20px 16px
           font-size: 1.250em
 
           &::placeholder

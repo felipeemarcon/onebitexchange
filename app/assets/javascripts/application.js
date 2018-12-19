@@ -11,11 +11,11 @@
 // about supported directives.
 //
 //= require jquery
+//= require rails-ujs
+//= require activestorage
+//= require turbolinks
 //= require tether/dist/js/tether
 //= require bootstrap/dist/js/bootstrap.bundle
 //= require jquery.customSelect/jquery.customSelect.min
 //= require jquery-mask-plugin/dist/jquery.mask.min
-//= require rails-ujs
-//= require activestorage
-//= require turbolinks
 //= require_tree .

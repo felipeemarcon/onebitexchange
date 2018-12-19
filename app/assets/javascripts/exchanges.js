@@ -2,7 +2,8 @@ $(document).ready(() => {
   
   selectCustom();
   focusExchanged();
-  invertValuesCurrency();
+  sendForm();
+  calculateCurrency();
 
   function selectCustom() {
     $('.select-custom-exchange').customSelect();
@@ -34,45 +35,48 @@ $(document).ready(() => {
     });
   }
 
-  $('form').submit(() => {
-    const formAction = $('form').attr('action');
+  function sendForm() {
+    const exchangeForm = $('#exchange_form');
 
-    let convertRoute = '/convert';
-    let sourceCurrency = $('#source_currency');
-    let targetCurrency = $('#target_currency');
-    let amount = $('#amount');
-    let convertResult = $('#resultExchange');
+    $('#exchange_form input, select').on('input', function() {
+      $(this).closest(exchangeForm).submit();
+    });    
+  }
 
-    if (formAction === convertRoute) {
-      $.ajax(convertRoute, {
-        type: 'GET',
-        dataType: 'json',
-        data: {
-          source_currency: sourceCurrency.val(),
-          target_currency: targetCurrency.val(),
-          amount: amount.val()
-        },
-        error(jqXHR, textStatus, errorThrown) {
-          return alert(textStatus);
-        },
-        success(data, text, jqXHR) {
-          return convertResult.val(Math.round(data.value * 100) / 100);
-        }
-      });
-      return false;
-    }
-  });
+  function calculateCurrency() {
+    const exchangeForm = $('#exchange_form');
 
-  function invertValuesCurrency() {
-    let sourceCurrency = $('#source_currency');
-    let targetCurrency = $('#target_currency');
-    const invertConvert = $('#invertConvert');
+    exchangeForm.submit(() => {
+      const formAction = exchangeForm.attr('action');
 
-    console.log(sourceCurrency.val());
-    console.log(targetCurrency.val());
+      let convertRoute = '/convert';
+      let sourceCurrency = $('#source_currency');
+      let targetCurrency = $('#target_currency');
+      let amount = $('#amount');
+      let convertResult = $('#resultExchange');
 
-    invertConvert.click((e) => {
-      e.preventDefault();
-    })
+      if (formAction === convertRoute) {
+        $.ajax(convertRoute, {
+          type: 'GET',
+          dataType: 'json',
+          data: {
+            source_currency: sourceCurrency.val(),
+            target_currency: targetCurrency.val(),
+            amount: amount.val()
+          },
+          error(jqXHR, textStatus, errorThrown) {
+            return alert(textStatus);
+          },
+          success(data, text, jqXHR) {
+            // convertResult.val('Calculando...');
+            // setTimeout(() => {
+              return convertResult.val(Math.round(data.value * 100) / 100)
+              // convertResult.removeClass('calculating')
+            // }, 500);
+          }
+        });
+        return false;
+      }
+    });
   }
 });
