@@ -4,6 +4,7 @@ $(document).ready(() => {
   focusExchanged();
   sendForm();
   calculateCurrency();
+  // invertCurrency();
 
   function selectCustom() {
     $('.select-custom-exchange').customSelect();
@@ -13,33 +14,22 @@ $(document).ready(() => {
     const btnFocus = $('#focus-formExchange');
     const resetButton = $('.reset_form')
     let amount = $('#amount')
-    const exchangeForm = $('#exchange_form');
 
     btnFocus.click((e) => {
       e.preventDefault();
-      exchangeForm.find('#amount').focus();
+      amount.focus();
     });
 
-    amount.on("input", () => {
-      if (amount.length >= 1) {
-        resetButton.removeAttr("disabled");
-        resetButton.addClass('active');
-
-        resetButton.click(() => {
-          amount.focus();
-        });
-      } else if (amount.length == 0) {
-        resetButton.attr("disabled", "disabled");
-        resetButton.removeClass('active');
-      }
+    resetButton.click((e) => {
+      amount.focus();
     });
   }
 
   function sendForm() {
     const exchangeForm = $('#exchange_form');
 
-    $('#exchange_form input, select').on('input', function() {
-      $(this).closest(exchangeForm).submit();
+    $('#exchange_form input, #exchange_form select').on('input', function () {
+      exchangeForm.submit();
     });    
   }
 
@@ -54,6 +44,7 @@ $(document).ready(() => {
       let targetCurrency = $('#target_currency');
       let amount = $('#amount');
       let convertResult = $('#resultExchange');
+      let loading = $('.app__form--loading');
 
       if (formAction === convertRoute) {
         $.ajax(convertRoute, {
@@ -68,15 +59,48 @@ $(document).ready(() => {
             return alert(textStatus);
           },
           success(data, text, jqXHR) {
-            // convertResult.val('Calculando...');
-            // setTimeout(() => {
-              return convertResult.val(Math.round(data.value * 100) / 100)
-              // convertResult.removeClass('calculating')
-            // }, 500);
+            loading.show();
+            convertResult.css('opacity', '0.2');
+            setTimeout(() => {
+              return convertResult.val(Math.round(data.value * 100) / 100),
+              convertResult.css('opacity', '1'),
+              loading.hide();
+            }, 1000);
           }
         });
         return false;
       }
+    });
+  }
+
+  function invertCurrency() {
+
+    let sourceCurrency = $('#source_currency');
+    let sourceCurrencySelect = sourceCurrency.find(":selected");
+
+    targetCurrency = $('#target_currency');
+    targetCurrencySelect = targetCurrency.find(":selected");
+
+    const exchangeForm = $('#exchange_form');
+    const triggerInvert = $('#invertConvert');
+
+    sourceCurrencyVal = sourceCurrencySelect.val();
+    targetCurrencyVal = targetCurrencySelect.val();
+
+    triggerInvert.on("click", function (e) {
+      e.preventDefault();
+
+      // target
+      $(`#source_currency option[value=${targetCurrencyVal}]`).attr('selected', 'selected');
+      sourceCurrency.val(targetCurrencyVal);
+      
+      $(`#target_currency option[value=${sourceCurrencyVal}]`).attr('selected', 'selected');
+
+      // Report results
+      console.log(sourceCurrencySelect.val(), targetCurrencySelect.val());
+
+      exchangeForm.submit();
+
     });
   }
 });

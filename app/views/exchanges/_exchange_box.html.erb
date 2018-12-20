@@ -21,9 +21,12 @@
   <div class="app__form--result input-group">
     <label class="is-txt-gray-dark is-txt-medium text-center">O valor da conversão é</label>
     <input type='text' id='resultExchange' name='result' class='is-txt-green-light is-txt-medium text-center' placeholder='Resultado' readonly>
+    <div class="app__form--loading" style="display: none;">
+      <%= svg('loading') %>
+    </div>
   </div>
   <div class="app__form--options input-group mb-0">
-    <%# <a href="" class="is-txt-green-light" id="invertConvert">Inverter conversão</a> %>
-    <button class="is-txt-gray-light reset_form" type="reset" disabled="disabled">Limpar conversão</button>
+    <%# <a href="#" class="is-txt-green-light" id="invertConvert">Inverter conversão</a> %>
+    <button class="is-txt-gray-light reset_form" type="reset">Limpar conversão</button>
   </div>
 <% end %>
