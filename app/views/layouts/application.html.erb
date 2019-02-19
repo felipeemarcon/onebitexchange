@@ -6,17 +6,16 @@
     <meta name="keywords" content="conversor, moedas, real, dólar, euro, dinheiro, economia"/>
     <meta name="robots" content="index, follow">
 
-
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag '/favicon.png' %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
     <%= yield %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </body>
 </html>
