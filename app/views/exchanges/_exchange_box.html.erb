@@ -1,32 +1,32 @@
 <%= form_tag('/convert', method: :get, id: 'exchange_form', class: "app__form") do %>
   <div class="input-group">
-    <label class="is-txt-gray-light is-txt-medium">Moeda local</label>
+    <label class="is-txt-gray-light is-txt-medium">Local currency</label>
     <div class="input-hold">
       <%= select_tag 'source_currency', options_for_select(currency_list, 'BRL'), class: 'select-custom-exchange', id: 'source_currency' %>
     </div>
   </div>
   <div class="input-group">
-    <label class="is-txt-gray-light is-txt-medium">Moeda de conversão</label>
+    <label class="is-txt-gray-light is-txt-medium">Currency conversion</label>
     <div class="input-hold">
       <%= select_tag 'target_currency', options_for_select(currency_list, 'USD'), class: 'select-custom-exchange', id: 'target_currency'%>
     </div>
   </div>
   <div class="input-group">
-    <label class="is-txt-gray-light is-txt-medium">Valor da conversão</label>
-    <input type='number' name='amount' id='amount' placeholder='Insira o valor para conversão. Ex: 10' step='any' required>
+    <label class="is-txt-gray-light is-txt-medium">Conversion value</label>
+    <input type='number' name='amount' id='amount' placeholder='Insert a value to convert. Ex: 10' step='any' required>
   </div>
   <div class="input-group btn-group">
-    <button class="btn btn-lg btn-green-light is-txt-medium" type="submit">Converter</button>
+    <button class="btn btn-lg btn-green-light is-txt-medium" type="submit">Convert</button>
   </div>
   <div class="app__form--result input-group">
-    <label class="is-txt-gray-dark is-txt-medium text-center">O valor da conversão é</label>
-    <input type='text' id='resultExchange' name='result' class='is-txt-green-light is-txt-medium text-center' placeholder='Resultado' readonly>
+    <label class="is-txt-gray-dark is-txt-medium text-center">Conversion value is</label>
+    <input type='text' id='resultExchange' name='result' class='is-txt-green-light is-txt-medium text-center' placeholder='Result' readonly>
     <div class="app__form--loading" style="display: none;">
       <%= svg('loading') %>
     </div>
   </div>
   <div class="app__form--options input-group mb-0">
     <%# <a href="#" class="is-txt-green-light" id="invertConvert">Inverter conversão</a> %>
-    <button class="is-txt-gray-light reset_form" type="reset">Limpar conversão</button>
+    <button class="is-txt-gray-light reset_form" type="reset">Reset conversion</button>
   </div>
 <% end %>
